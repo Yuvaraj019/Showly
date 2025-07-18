@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
   <!-- Toggle Hover Area -->
   <div class="corner-toggle">
     <i class="fas fa-bars"></i>
@@ -23,6 +24,20 @@
         <i class="fas fa-folder-open"></i>
         <span>Collection</span>
       </div>
+    </div>
+  </div>
+
+  <!-- Sign In Button -->
+  <div class="signin-button" onclick="toggleSignInModal()">Sign In</div>
+
+  <!-- Sign In Modal -->
+  <div id="signin-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="toggleSignInModal()">&times;</span>
+      <h2>Sign In</h2>
+      <input type="text" placeholder="Username" class="modal-input">
+      <input type="password" placeholder="Password" class="modal-input">
+      <button class="submit-btn">Login</button>
     </div>
   </div>
 
