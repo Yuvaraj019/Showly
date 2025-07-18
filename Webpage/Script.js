@@ -11,3 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Toggle Sign In Modal
+function toggleSignInModal() {
+  const modal = document.getElementById("signin-modal");
+  if (modal.style.display === "flex") {
+    modal.style.display = "none";
+  } else {
+    modal.style.display = "flex";
+    modal.style.justifyContent = "center";
+    modal.style.alignItems = "center";
+  }
+}
+
+// Optional: Close modal when clicking outside
+window.onclick = function(event) {
+  const modal = document.getElementById("signin-modal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
