@@ -5,7 +5,7 @@ body {
   color: white;
 }
 
-/* Search Box */
+/* Search Bar */
 .search-container {
   text-align: center;
   margin: 20px 0;
@@ -33,7 +33,7 @@ body {
   font-size: 16px;
 }
 
-/* Image Grid */
+/* Anime Cards */
 .image-row {
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Toggle Menu */
+/* Toggle Button Top-Left */
 .corner-toggle {
   position: fixed;
   top: 10px;
@@ -107,67 +107,4 @@ body {
 
 .action-item:hover {
   background-color: #333;
-}
-
-/* Sign In Button */
-.signin-button {
-  position: fixed;
-  top: 10px;
-  right: 20px;
-  background-color: #333;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  z-index: 1000;
-  font-size: 14px;
-}
-
-/* Sign In Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  color: white;
-  position: relative;
-  box-shadow: 0 0 10px #000;
-}
-
-.modal-input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.submit-btn {
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
 }
