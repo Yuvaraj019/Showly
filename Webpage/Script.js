@@ -1,13 +1,44 @@
-// Search bar filter
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.querySelector(".search-box input");
-  const cards = document.querySelectorAll(".anime-card");
+  const selectedEpisodesKey = 'selectedEpisodes';
+  let selectedEpisodes = JSON.parse(localStorage.getItem(selectedEpisodesKey)) || [];
 
-  input.addEventListener("input", () => {
-    const query = input.value.toLowerCase();
-    cards.forEach(card => {
-      const title = card.querySelector(".anime-title").textContent.toLowerCase();
-      card.style.display = title.includes(query) ? "block" : "none";
+  // All episode cards
+  const episodeCards = document.querySelectorAll('.episode-card');
+
+  // Load saved selections from localStorage
+  selectedEpisodes.forEach(epNum => {
+    const card = document.querySelector(`.episode-card[data-episode="${epNum}"]`);
+    if (card) {
+      card.querySelector('.ep-name').classList.add('selected');
+    }
+  });
+
+  // Toggle selection on click
+  episodeCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const epNum = card.getAttribute('data-episode');
+      const epName = card.querySelector('.ep-name');
+
+      if (epName.classList.contains('selected')) {
+        // Unselect
+        epName.classList.remove('selected');
+        selectedEpisodes = selectedEpisodes.filter(n => n !== epNum);
+      } else {
+        // Select
+        epName.classList.add('selected');
+        selectedEpisodes.push(epNum);
+      }
+      localStorage.setItem(selectedEpisodesKey, JSON.stringify(selectedEpisodes));
+    });
+  });
+
+  // Reset selections on clicking the title text
+  const animeText = document.querySelector('.anime-text');
+  animeText.addEventListener('click', () => {
+    selectedEpisodes = [];
+    localStorage.removeItem(selectedEpisodesKey);
+    document.querySelectorAll('.ep-name.selected').forEach(el => {
+      el.classList.remove('selected');
     });
   });
 });
