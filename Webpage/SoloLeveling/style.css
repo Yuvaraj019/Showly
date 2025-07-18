@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +11,11 @@ body {
   color: white;
   background: 
     linear-gradient(180deg, rgba(57,0,99,0.85) 0%, rgba(0,0,0,0.95) 80%),
-    url("Assets/SoloLeveling.jpg") no-repeat center center / cover;
+    url("https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/SoloLeveling/Assets/SoloLeveling.jpg") no-repeat center center / cover;
   padding: 40px 20px;
 }
 
+/* Container */
 .container {
   max-width: 900px;
   margin: auto;
@@ -23,6 +25,7 @@ body {
   box-shadow: 0 0 20px #8000ff88;
 }
 
+/* Logo */
 .logo {
   display: flex;
   justify-content: center;
@@ -39,6 +42,7 @@ body {
   letter-spacing: 2px;
 }
 
+/* Poster */
 .poster {
   display: block;
   margin: 0 auto 25px;
@@ -47,6 +51,7 @@ body {
   box-shadow: 0 0 20px #a366ffcc;
 }
 
+/* Title */
 h1 {
   text-align: center;
   font-size: 32px;
@@ -55,6 +60,7 @@ h1 {
   user-select: none;
 }
 
+/* Overview Section */
 .section {
   margin-bottom: 30px;
 }
