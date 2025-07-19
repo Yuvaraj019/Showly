@@ -1,23 +1,114 @@
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body {
-  min-height:100vh;
-  color:#fff;
-  background:
-    linear-gradient(to bottom, rgba(0,10,40,0.85) 0%, rgba(0,0,0,0.9) 60%, rgba(0,0,0,1) 100%),
-    url("Assets/BlueLock.jpg") no-repeat center/cover;
-  padding:40px 20px;
+/* Reset and base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.container { max-width:900px; margin:auto; background:rgba(0,20,40,0.85); border-radius:20px; padding:30px 40px; box-shadow:0 0 20px #00aaff88; }
-.poster { display:block; margin:0 auto 25px; width:180px; border-radius:12px; box-shadow:0 0 20px #00ccffcc; }
-h1 { text-align:center; font-size:32px; margin-bottom:25px; color:#99e6ff; user-select:none; }
-.section { margin-bottom:30px; }
-.overview h3 { font-size:22px; color:#66d9ff; margin-bottom:12px; border-bottom:2px solid #00aaff; padding-bottom:6px; user-select:none; }
-.overview p { font-size:16px; line-height:1.6; color:#d0f0ff; }
-.tracker-section { width:100%; padding:20px 10px 80px; box-sizing:border-box; }
-.tracker-section h3 { font-size:28px; margin-bottom:30px; border-bottom:2px solid #ffffff55; padding-bottom:8px; text-align:center; }
-.episodes-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:24px; width:100%; margin:auto; }
-.episode-card { display:flex; flex-direction:column; align-items:center; cursor:pointer; transition:transform .2s ease; }
-.episode-card:hover { transform:scale(1.03); }
-.episode-card img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; }
-.ep-name { margin-top:10px; font-size:16px; font-weight:600; user-select:none; }
-.ep-name.selected { color:#00ccff; font-weight:700; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #121212;
+  color: #eee;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.poster {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+  display: block;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fca311;
+}
+
+.section.overview {
+  background: rgba(255 255 255 / 0.05);
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.tracker-section {
+  max-width: 1100px;
+  margin: 0 auto 60px auto;
+  padding: 0 10px;
+}
+
+.tracker-section h3 {
+  color: #fca311;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #fca311;
+  padding-bottom: 5px;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+  gap: 15px;
+}
+
+.episode-card {
+  background: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 10px #000;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #fca311;
+}
+
+.episode-card img {
+  width: 100%;
+  object-fit: cover;
+  height: 180px;
+  border-bottom: 2px solid #fca311;
+}
+
+.ep-name {
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+  color: #fca311;
+  user-select: none;
+}
+
+/* Bottom fade effect */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(to top, #121212, transparent);
+  z-index: 10;
+}
