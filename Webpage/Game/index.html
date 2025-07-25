@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Backloggd Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Backloggd</div>
+      <div class="user">
+        <span>MonkeyDLuffyx</span>
+        <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games"/>
+        <button id="logGameBtn">+ Log a Game</button>
+        <!-- Unlog a Game button removed -->
+      </div>
+    </header>
+
+    <section class="profile">
+      <img src="Assets/Monkey D_ Luffy.jpeg" alt="Monkey D. Luffy Avatar" class="avatar" />
+      <div class="username">MonkeyDLuffyx</div>
+    </section>
+
+    <nav class="tabs" role="navigation">
+      <button class="active-tab" aria-current="page">Games</button>
+    </nav>
+
+    <main class="grid-container" id="gameContainer">
+      <!-- Game cards will go here -->
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
