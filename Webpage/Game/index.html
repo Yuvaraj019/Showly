@@ -2,18 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Backloggd Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Backloggd Clone with Supabase</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Supabase Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const SUPABASE_URL = 'https://rlzuanjjeajyyhaebbos.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJsenVhbmpqZWFqeXloYWViYm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM1NTgyMjIsImV4cCI6MjA2OTEzNDIyMn0.vZFNSoCzGxqkqmO4ac0ScRw4xOVoz2scTAPX2Eq0WCw';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="container">
@@ -21,7 +13,7 @@
       <div class="logo">Backloggd</div>
       <div class="user">
         <span>MonkeyDLuffyx</span>
-        <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games"/>
+        <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games" />
         <button id="logGameBtn">+ Log a Game</button>
       </div>
     </header>
@@ -40,10 +32,12 @@
     </nav>
 
     <main class="grid-container" id="gameContainer">
-      <!-- Game cards will be added dynamically -->
+      <!-- Game cards will be dynamically added -->
     </main>
   </div>
 
+  <!-- Load Supabase JS client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
