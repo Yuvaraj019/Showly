@@ -6,6 +6,14 @@
   <title>Backloggd Clone</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Supabase Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const SUPABASE_URL = 'https://rlzuanjjeajyyhaebbos.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJsenVhbmpqZWFqeXloYWViYm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM1NTgyMjIsImV4cCI6MjA2OTEzNDIyMn0.vZFNSoCzGxqkqmO4ac0ScRw4xOVoz2scTAPX2Eq0WCw';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
 </head>
 <body>
   <div class="container">
@@ -32,7 +40,7 @@
     </nav>
 
     <main class="grid-container" id="gameContainer">
-      <!-- Game cards will be dynamically added -->
+      <!-- Game cards will be added dynamically -->
     </main>
   </div>
 
