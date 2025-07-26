@@ -2,26 +2,7 @@ const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
-const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
-
-const defaultGames = [
-  { title: "A Plague Tale: Innocence", image: imageBaseURL + "APlagueTaleInnocence.jpg" },
-  { title: "A Plague Tale: Requiem", image: imageBaseURL + "APlagueTaleRequiem.jpg" },
-  { title: "Black Myth: Wukong", image: imageBaseURL + "BlackMythWuKong.jpg" },
-  { title: "Dark Sider III", image: imageBaseURL + "DarkSidersIII.jpg" },
-  { title: "Death Stranding: Directors Cut", image: imageBaseURL + "DeathStrandingDirectorsCut.jpg" },
-  { title: "Far Cry 3", image: imageBaseURL + "Farcry3.jpg" },
-  { title: "Florence", image: imageBaseURL + "Florence.jpg" },
-  { title: "Moonlighter", image: imageBaseURL + "Moonlighter.jpg" },
-  { title: "Resident Evil VIII: Village", image: imageBaseURL + "ResidentEvilVIIIVillage.jpg" },
-  { title: "Stray", image: imageBaseURL + "Stray.jpg" },
-];
-
-let games = JSON.parse(localStorage.getItem("games")) || defaultGames;
-
-function saveGamesToStorage() {
-  localStorage.setItem("games", JSON.stringify(games));
-}
+let games = [];
 
 function createGameCard({ title, image }) {
   const gameDiv = document.createElement("div");
@@ -32,7 +13,7 @@ function createGameCard({ title, image }) {
   img.alt = title;
   img.loading = "lazy";
   img.onerror = () => {
-    img.src = imageBaseURL + "placeholder.jpg";
+    img.src = "https://via.placeholder.com/300x400?text=Image+Not+Found";
     img.alt = "Image not found";
   };
 
@@ -51,19 +32,44 @@ function renderGames(filteredGames = games) {
   });
 }
 
-function handleLogGame() {
-  const title = prompt("Enter game title:");
-  if (!title || !title.trim()) return alert("Title cannot be empty.");
+async function fetchGames() {
+  const { data, error } = await supabase
+    .from("games")
+    .select("*")
+    .order("title", { ascending: true });
 
-  const image = prompt("Enter image URL or path:");
-  if (!image || !image.trim()) return alert("Image path is required.");
+  if (error) {
+    console.error("Fetch error:", error.message);
+    return;
+  }
 
-  games.push({ title: title.trim(), image: image.trim() });
-  saveGamesToStorage();
+  games = data;
   renderGames();
 }
 
-// Search functionality
+async function handleLogGame() {
+  const title = prompt("Enter game title:");
+  if (!title?.trim()) return alert("Title is required.");
+
+  const image = prompt("Enter image URL:");
+  if (!image?.trim()) return alert("Image URL is required.");
+
+  const { error } = await supabase.from("games").insert([
+    {
+      title: title.trim(),
+      image: image.trim(),
+    },
+  ]);
+
+  if (error) {
+    console.error("Insert error:", error.message);
+    alert("Failed to save game.");
+    return;
+  }
+
+  fetchGames(); // Refresh the grid
+}
+
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase();
   const filtered = games.filter((game) =>
@@ -74,5 +80,4 @@ searchInput.addEventListener("input", () => {
 
 logButton.addEventListener("click", handleLogGame);
 
-// Initial render
-renderGames();
+fetchGames(); // Initial fetch
