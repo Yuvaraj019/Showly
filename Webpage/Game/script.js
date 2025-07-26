@@ -70,7 +70,6 @@ searchInput.addEventListener("input", () => {
   renderGames(filtered);
 });
 
-// Button event handlers
 logButton.addEventListener("click", handleLogGame);
 
 // Initial render
