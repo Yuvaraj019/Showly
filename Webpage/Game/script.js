@@ -1,74 +1,76 @@
-// Firebase config (replace with yours)
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DB_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_MSG_ID",
-  appId: "YOUR_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
 const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
-let allGames = [];
+const defaultGames = [
+  { title: "A Plague Tale: Innocence", image: "Assets/APlagueTaleInnocence.jpg" },
+  { title: "A Plague Tale: Requiem", image: "Assets/APlagueTaleRequiem.jpg" },
+  { title: "Black Myth: Wukong", image: "Assets/BlackMythWuKong.jpg" },
+  { title: "Dark Sider III", image: "Assets/DarkSidersIII.jpg" },
+  { title: "Death Stranding: Directors Cut", image: "Assets/DeathStrandingDirectorsCut.jpg" },
+  { title: "Far Cry 3", image: "Assets/Farcry3.jpg" },
+  { title: "Florence", image: "Assets/Florence.jpg" },
+  { title: "Moonlighter", image: "Assets/Moonlighter.jpg" },
+  { title: "Resident Evil VIII: Village", image: "Assets/ResidentEvilVIIIVillage.jpg" },
+  { title: "Stray", image: "Assets/Stray.jpg" },
+];
 
-function saveGameToFirebase(game) {
-  db.ref("games").push(game);
-}
+let games = JSON.parse(localStorage.getItem("games")) || defaultGames;
 
-function fetchGamesFromFirebase() {
-  db.ref("games").on("value", snapshot => {
-    const data = snapshot.val();
-    allGames = data ? Object.values(data) : [];
-    renderGames(allGames);
-  });
+function saveGamesToStorage() {
+  localStorage.setItem("games", JSON.stringify(games));
 }
 
 function createGameCard({ title, image }) {
-  const div = document.createElement("div");
-  div.className = "game";
+  const gameDiv = document.createElement("div");
+  gameDiv.className = "game";
 
   const img = document.createElement("img");
   img.src = image;
   img.alt = title;
+  img.loading = "lazy";
   img.onerror = () => {
     img.src = "Assets/placeholder.jpg";
+    img.alt = "Image not found";
   };
 
-  const titleDiv = document.createElement("div");
-  titleDiv.className = "game-title";
-  titleDiv.textContent = title;
+  const caption = document.createElement("div");
+  caption.className = "game-title";
+  caption.textContent = title;
 
-  div.append(img, titleDiv);
-  return div;
+  gameDiv.append(img, caption);
+  return gameDiv;
 }
 
-function renderGames(games) {
+function renderGames(filteredGames = games) {
   gameContainer.innerHTML = "";
-  games.forEach(game => gameContainer.appendChild(createGameCard(game)));
+  filteredGames.forEach((game) => {
+    gameContainer.appendChild(createGameCard(game));
+  });
 }
 
-logButton.addEventListener("click", () => {
+function handleLogGame() {
   const title = prompt("Enter game title:");
-  if (!title) return;
+  if (!title || !title.trim()) return alert("Title cannot be empty.");
 
-  const image = prompt("Enter image URL or path:");
-  if (!image) return;
+  const image = prompt("Enter image URL or local path:");
+  if (!image || !image.trim()) return alert("Image path is required.");
 
-  const newGame = { title: title.trim(), image: image.trim() };
-  saveGameToFirebase(newGame);
-});
+  games.push({ title: title.trim(), image: image.trim() });
+  saveGamesToStorage();
+  renderGames();
+}
 
+// Search functionality
 searchInput.addEventListener("input", () => {
-  const q = searchInput.value.toLowerCase();
-  const filtered = allGames.filter(game => game.title.toLowerCase().includes(q));
+  const query = searchInput.value.toLowerCase();
+  const filtered = games.filter((game) =>
+    game.title.toLowerCase().includes(query)
+  );
   renderGames(filtered);
 });
 
-fetchGamesFromFirebase();
+logButton.addEventListener("click", handleLogGame);
+
+// Initial render
+renderGames();
