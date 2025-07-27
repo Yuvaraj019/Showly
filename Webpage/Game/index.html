@@ -6,7 +6,6 @@
   <title>Backloggd Clone</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div class="container">
@@ -35,19 +34,6 @@
     <main class="grid-container" id="gameContainer">
       <!-- Game cards will be dynamically added -->
     </main>
-  </div>
-
-  <!-- Modal -->
-  <div id="gameModal" class="modal hidden">
-    <div class="modal-content">
-      <h2>Log a New Game</h2>
-      <input type="text" id="gameTitle" placeholder="Game title" />
-      <input type="text" id="gameImage" placeholder="Image URL or path" />
-      <div class="modal-actions">
-        <button id="cancelBtn">Cancel</button>
-        <button id="submitBtn">Add Game</button>
-      </div>
-    </div>
   </div>
 
   <script src="script.js"></script>
