@@ -2,13 +2,7 @@ const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
-const modal = document.getElementById("logModal");
-const gameTitleInput = document.getElementById("gameTitleInput");
-const gameImageInput = document.getElementById("gameImageInput");
-const addGameSubmit = document.getElementById("addGameSubmit");
-const cancelBtn = document.getElementById("cancelBtn");
-
-const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/Webpage/Game/Assets/";
+const imageBaseURL = "Assets/";
 
 const defaultGames = [
   { title: "A Plague Tale: Innocence", image: imageBaseURL + "APlagueTaleInnocence.jpg" },
@@ -52,13 +46,22 @@ function createGameCard({ title, image }) {
 
 function renderGames(filteredGames = games) {
   gameContainer.innerHTML = "";
-  if (filteredGames.length === 0) {
-    gameContainer.innerHTML = "<p>No games found.</p>";
-    return;
-  }
   filteredGames.forEach((game) => {
     gameContainer.appendChild(createGameCard(game));
   });
+}
+
+function handleLogGame() {
+  const title = prompt("Enter game title:");
+  if (!title || !title.trim()) return alert("Title cannot be empty.");
+
+  const image = prompt("Enter image file name (inside Assets folder):");
+  if (!image || !image.trim()) return alert("Image path is required.");
+
+  const imagePath = imageBaseURL + image.trim();
+  games.push({ title: title.trim(), image: imagePath });
+  saveGamesToStorage();
+  renderGames();
 }
 
 searchInput.addEventListener("input", () => {
@@ -69,34 +72,6 @@ searchInput.addEventListener("input", () => {
   renderGames(filtered);
 });
 
-logButton.addEventListener("click", () => {
-  gameTitleInput.value = "";
-  gameImageInput.value = "";
-  modal.style.display = "flex";
-});
+logButton.addEventListener("click", handleLogGame);
 
-cancelBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-addGameSubmit.addEventListener("click", () => {
-  const title = gameTitleInput.value.trim();
-  const image = gameImageInput.value.trim();
-
-  if (!title || !image) {
-    alert("Both fields are required.");
-    return;
-  }
-
-  games.push({ title, image });
-  saveGamesToStorage();
-  renderGames();
-  modal.style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
-});
-
-// Initial render
 renderGames();
