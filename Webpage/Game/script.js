@@ -17,11 +17,7 @@ const defaultGames = [
   { title: "Stray", image: imageBaseURL + "Stray.jpg" },
 ];
 
-let games = JSON.parse(localStorage.getItem("games")) || defaultGames;
-
-function saveGamesToStorage() {
-  localStorage.setItem("games", JSON.stringify(games));
-}
+let tempGames = [];
 
 function createGameCard({ title, image }) {
   const gameDiv = document.createElement("div");
@@ -44,9 +40,9 @@ function createGameCard({ title, image }) {
   return gameDiv;
 }
 
-function renderGames(filteredGames = games) {
+function renderGames(gamesToRender = defaultGames.concat(tempGames)) {
   gameContainer.innerHTML = "";
-  filteredGames.forEach((game) => {
+  gamesToRender.forEach((game) => {
     gameContainer.appendChild(createGameCard(game));
   });
 }
@@ -59,16 +55,15 @@ function handleLogGame() {
   if (!image || !image.trim()) return alert("Image path is required.");
 
   const imagePath = imageBaseURL + image.trim();
-  games.push({ title: title.trim(), image: imagePath });
-  saveGamesToStorage();
+  tempGames.push({ title: title.trim(), image: imagePath });
   renderGames();
 }
 
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase();
-  const filtered = games.filter((game) =>
-    game.title.toLowerCase().includes(query)
-  );
+  const filtered = defaultGames
+    .concat(tempGames)
+    .filter((game) => game.title.toLowerCase().includes(query));
   renderGames(filtered);
 });
 
