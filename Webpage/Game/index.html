@@ -1,41 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Backloggd Clone</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">Backloggd</div>
-      <div class="user">
-        <span>MonkeyDLuffyx</span>
-        <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games"/>
-        <button id="logGameBtn">+ Log a Game</button>
-      </div>
-    </header>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-    <section class="profile">
-      <img
-        src="https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/Monkey%20D_%20Luffy.jpeg"
-        alt="Monkey D. Luffy Avatar"
-        class="avatar"
-      />
-      <div class="username">MonkeyDLuffyx</div>
-    </section>
+body {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0 20px;
+}
 
-    <nav class="tabs" role="navigation">
-      <button class="active-tab" aria-current="page">Games</button>
-    </nav>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-    <main class="grid-container" id="gameContainer">
-      <!-- Game cards will be dynamically added -->
-    </main>
-  </div>
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.user input {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.user button {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.user button:hover {
+  background-color: #d81b60;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0 10px 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+.tabs button {
+  background: none;
+  color: #aaa;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.tabs .active-tab {
+  color: white;
+  border-bottom: 2px solid #e91e63;
+  font-weight: 600;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.game img {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.game img:hover {
+  transform: scale(1.03);
+}
+
+.game-title {
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .user input {
+    width: 100%;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
