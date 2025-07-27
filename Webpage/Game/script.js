@@ -1,3 +1,8 @@
+const SUPABASE_URL = "https://vwipischnkmsojtzcwdf.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3aXBpc2Nobmttc29qdHpjd2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MDA5MDMsImV4cCI6MjA2OTE3NjkwM30.2kbRP6yjMR-QAYph9VzbGWZSggtKnQQAFMfKiN6DGOY";
+
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
@@ -8,25 +13,14 @@ const gameImageInput = document.getElementById("gameImage");
 const cancelBtn = document.getElementById("cancelBtn");
 const submitBtn = document.getElementById("submitBtn");
 
-const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
-
-const defaultGames = [
-  { title: "A Plague Tale: Innocence", image: imageBaseURL + "APlagueTaleInnocence.jpg" },
-  { title: "A Plague Tale: Requiem", image: imageBaseURL + "APlagueTaleRequiem.jpg" },
-  { title: "Black Myth: Wukong", image: imageBaseURL + "BlackMythWuKong.jpg" },
-  { title: "Dark Sider III", image: imageBaseURL + "DarkSidersIII.jpg" },
-  { title: "Death Stranding: Directors Cut", image: imageBaseURL + "DeathStrandingDirectorsCut.jpg" },
-  { title: "Far Cry 3", image: imageBaseURL + "Farcry3.jpg" },
-  { title: "Florence", image: imageBaseURL + "Florence.jpg" },
-  { title: "Moonlighter", image: imageBaseURL + "Moonlighter.jpg" },
-  { title: "Resident Evil VIII: Village", image: imageBaseURL + "ResidentEvilVIIIVillage.jpg" },
-  { title: "Stray", image: imageBaseURL + "Stray.jpg" },
-];
-
-let games = JSON.parse(localStorage.getItem("games")) || defaultGames;
-
-function saveGamesToStorage() {
-  localStorage.setItem("games", JSON.stringify(games));
+// Load all games
+async function loadGames() {
+  const { data, error } = await supabase.from("games").select("*").order("title");
+  if (error) {
+    console.error("Error loading games:", error.message);
+    return;
+  }
+  renderGames(data);
 }
 
 function createGameCard({ title, image }) {
@@ -37,10 +31,6 @@ function createGameCard({ title, image }) {
   img.src = image;
   img.alt = title;
   img.loading = "lazy";
-  img.onerror = () => {
-    img.src = imageBaseURL + "placeholder.jpg";
-    img.alt = "Image not found";
-  };
 
   const caption = document.createElement("div");
   caption.className = "game-title";
@@ -50,14 +40,24 @@ function createGameCard({ title, image }) {
   return gameDiv;
 }
 
-function renderGames(filteredGames = games) {
+function renderGames(games) {
   gameContainer.innerHTML = "";
-  filteredGames.forEach((game) => {
+  games.forEach((game) => {
     gameContainer.appendChild(createGameCard(game));
   });
 }
 
-// Modal handling
+async function addGame(title, image) {
+  const { error } = await supabase.from("games").insert([{ title, image }]);
+  if (error) {
+    alert("Error adding game.");
+    console.error(error);
+  } else {
+    loadGames(); // Refresh after adding
+  }
+}
+
+// Modal actions
 logButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   gameTitleInput.value = "";
@@ -68,27 +68,26 @@ cancelBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
 
-submitBtn.addEventListener("click", () => {
+submitBtn.addEventListener("click", async () => {
   const title = gameTitleInput.value.trim();
   const image = gameImageInput.value.trim();
+  if (!title || !image) {
+    alert("Please provide both title and image.");
+    return;
+  }
 
-  if (!title) return alert("Title is required.");
-  if (!image) return alert("Image URL is required.");
-
-  games.push({ title, image });
-  saveGamesToStorage();
-  renderGames();
+  await addGame(title, image);
   modal.classList.add("hidden");
 });
 
-// Search functionality
-searchInput.addEventListener("input", () => {
+// Search games
+searchInput.addEventListener("input", async () => {
   const query = searchInput.value.toLowerCase();
-  const filtered = games.filter((game) =>
-    game.title.toLowerCase().includes(query)
-  );
-  renderGames(filtered);
+  const { data, error } = await supabase
+    .from("games")
+    .select("*")
+    .ilike("title", `%${query}%`);
+  if (!error) renderGames(data);
 });
 
-// Initial render
-renderGames();
+loadGames();
