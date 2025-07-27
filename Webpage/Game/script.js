@@ -8,14 +8,16 @@ const gameImageInput = document.getElementById("gameImage");
 const cancelBtn = document.getElementById("cancelBtn");
 const submitBtn = document.getElementById("submitBtn");
 
-const SUPABASE_URL = "https://vwipischnkmsojtzcwdf.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3aXBpc2Nobmttc29qdHpjd2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MDA5MDMsImV4cCI6MjA2OTE3NjkwM30.2kbRP6yjMR-QAYph9VzbGWZSggtKnQQAFMfKiN6DGOY";
-
 const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let games = [];
 
-// Create game card UI
+// ✅ Supabase credentials
+const supabaseUrl = "https://vwipischnkmsojtzcwdf.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3aXBpc2Nobmttc29qdHpjd2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MDA5MDMsImV4cCI6MjA2OTE3NjkwM30.2kbRP6yjMR-QAYph9VzbGWZSggtKnQQAFMfKiN6DGOY";  // Replace with your real anon key
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// ✅ Render game cards
 function createGameCard({ title, image }) {
   const gameDiv = document.createElement("div");
   gameDiv.className = "game";
@@ -37,64 +39,73 @@ function createGameCard({ title, image }) {
   return gameDiv;
 }
 
-// Render games
-function renderGames(games) {
+function renderGames(filteredGames = games) {
   gameContainer.innerHTML = "";
-  games.forEach((game) => {
+  filteredGames.forEach((game) => {
     gameContainer.appendChild(createGameCard(game));
   });
 }
 
-// Load games from Supabase
-async function loadGames() {
-  const { data, error } = await supabase.from("games").select("*").order("created_at", { ascending: false });
+// ✅ Fetch games from Supabase
+async function fetchGames() {
+  const { data, error } = await supabase
+    .from("games")
+    .select("*")
+    .order("id", { ascending: false });
+
   if (error) {
-    console.error("Failed to load games:", error.message);
+    console.error("Error fetching games:", error);
     return;
   }
-  renderGames(data);
+
+  games = data;
+  renderGames();
 }
 
-// Modal open
+// ✅ Add game to Supabase
+async function addGame(title, image) {
+  const { error } = await supabase
+    .from("games")
+    .insert([{ title, image }]);
+
+  if (error) {
+    alert("Failed to log game. Try again.");
+    return;
+  }
+
+  fetchGames();
+  modal.classList.add("hidden");
+}
+
+// ✅ Modal handling
 logButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
   gameTitleInput.value = "";
   gameImageInput.value = "";
 });
 
-// Modal cancel
 cancelBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
 
-// Submit new game
-submitBtn.addEventListener("click", async () => {
+submitBtn.addEventListener("click", () => {
   const title = gameTitleInput.value.trim();
   const image = gameImageInput.value.trim();
 
   if (!title) return alert("Title is required.");
   if (!image) return alert("Image URL is required.");
 
-  const { error } = await supabase.from("games").insert([{ title, image }]);
-  if (error) {
-    alert("Failed to add game.");
-    console.error(error.message);
-    return;
-  }
-
-  modal.classList.add("hidden");
-  await loadGames(); // refresh list
+  addGame(title, image);
 });
 
-// Search games
-searchInput.addEventListener("input", async () => {
+// ✅ Search filter
+searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase();
-  const { data } = await supabase.from("games").select("*");
-  const filtered = data.filter((game) =>
+  const filtered = games.filter((game) =>
     game.title.toLowerCase().includes(query)
   );
   renderGames(filtered);
 });
 
-// Initial load
-loadGames();
+// ✅ Initial load
+fetchGames();
