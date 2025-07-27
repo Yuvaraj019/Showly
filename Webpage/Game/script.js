@@ -1,7 +1,6 @@
 const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
-const unlogButton = document.getElementById("unlogGameBtn");
 
 const imageBaseURL = "Assets/";
 
@@ -18,7 +17,6 @@ const defaultGames = [
   { title: "Stray", image: imageBaseURL + "Stray.jpg" },
 ];
 
-// Only store new games separately
 let loggedGames = JSON.parse(localStorage.getItem("loggedGames")) || [];
 
 function saveLoggedGames() {
@@ -72,32 +70,10 @@ function handleLogGame() {
   renderGames(searchInput.value);
 }
 
-function handleUnlogGame() {
-  if (loggedGames.length === 0) return alert("No logged games to remove.");
-
-  const title = prompt("Enter exact title of the game to unlog:");
-  if (!title || !title.trim()) return;
-
-  const newLogged = loggedGames.filter(
-    (game) => game.title.toLowerCase() !== title.trim().toLowerCase()
-  );
-
-  if (newLogged.length === loggedGames.length) {
-    alert("No such game found in logged games.");
-    return;
-  }
-
-  loggedGames = newLogged;
-  saveLoggedGames();
-  renderGames(searchInput.value);
-}
-
 searchInput.addEventListener("input", () => {
   renderGames(searchInput.value);
 });
 
 logButton.addEventListener("click", handleLogGame);
-unlogButton.addEventListener("click", handleUnlogGame);
 
-// Initial render
 renderGames();
