@@ -2,7 +2,7 @@ const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
-const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
+const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/Webpage/Game/Assets/";
 
 const defaultGames = [
   { title: "A Plague Tale: Innocence", image: imageBaseURL + "APlagueTaleInnocence.jpg" },
