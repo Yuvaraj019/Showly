@@ -2,6 +2,12 @@ const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
+const modal = document.getElementById("gameModal");
+const gameTitleInput = document.getElementById("gameTitle");
+const gameImageInput = document.getElementById("gameImage");
+const cancelBtn = document.getElementById("cancelBtn");
+const submitBtn = document.getElementById("submitBtn");
+
 const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
 
 const defaultGames = [
@@ -51,17 +57,29 @@ function renderGames(filteredGames = games) {
   });
 }
 
-function handleLogGame() {
-  const title = prompt("Enter game title:");
-  if (!title || !title.trim()) return alert("Title cannot be empty.");
+// Modal handling
+logButton.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+  gameTitleInput.value = "";
+  gameImageInput.value = "";
+});
 
-  const image = prompt("Enter image URL or path:");
-  if (!image || !image.trim()) return alert("Image path is required.");
+cancelBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
 
-  games.push({ title: title.trim(), image: image.trim() });
+submitBtn.addEventListener("click", () => {
+  const title = gameTitleInput.value.trim();
+  const image = gameImageInput.value.trim();
+
+  if (!title) return alert("Title is required.");
+  if (!image) return alert("Image URL is required.");
+
+  games.push({ title, image });
   saveGamesToStorage();
   renderGames();
-}
+  modal.classList.add("hidden");
+});
 
 // Search functionality
 searchInput.addEventListener("input", () => {
@@ -72,8 +90,5 @@ searchInput.addEventListener("input", () => {
   renderGames(filtered);
 });
 
-logButton.addEventListener("click", handleLogGame);
-
 // Initial render
 renderGames();
-
