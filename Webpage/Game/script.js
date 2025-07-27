@@ -1,6 +1,7 @@
 const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
+const unlogButton = document.getElementById("unlogGameBtn");
 
 const imageBaseURL = "Assets/";
 
@@ -17,7 +18,12 @@ const defaultGames = [
   { title: "Stray", image: imageBaseURL + "Stray.jpg" },
 ];
 
-let tempGames = [];
+// Only store new games separately
+let loggedGames = JSON.parse(localStorage.getItem("loggedGames")) || [];
+
+function saveLoggedGames() {
+  localStorage.setItem("loggedGames", JSON.stringify(loggedGames));
+}
 
 function createGameCard({ title, image }) {
   const gameDiv = document.createElement("div");
@@ -40,9 +46,13 @@ function createGameCard({ title, image }) {
   return gameDiv;
 }
 
-function renderGames(gamesToRender = defaultGames.concat(tempGames)) {
+function renderGames(filter = "") {
   gameContainer.innerHTML = "";
-  gamesToRender.forEach((game) => {
+  const allGames = [...defaultGames, ...loggedGames];
+  const filtered = allGames.filter((game) =>
+    game.title.toLowerCase().includes(filter.toLowerCase())
+  );
+  filtered.forEach((game) => {
     gameContainer.appendChild(createGameCard(game));
   });
 }
@@ -55,18 +65,39 @@ function handleLogGame() {
   if (!image || !image.trim()) return alert("Image path is required.");
 
   const imagePath = imageBaseURL + image.trim();
-  tempGames.push({ title: title.trim(), image: imagePath });
-  renderGames();
+  const newGame = { title: title.trim(), image: imagePath };
+
+  loggedGames.push(newGame);
+  saveLoggedGames();
+  renderGames(searchInput.value);
+}
+
+function handleUnlogGame() {
+  if (loggedGames.length === 0) return alert("No logged games to remove.");
+
+  const title = prompt("Enter exact title of the game to unlog:");
+  if (!title || !title.trim()) return;
+
+  const newLogged = loggedGames.filter(
+    (game) => game.title.toLowerCase() !== title.trim().toLowerCase()
+  );
+
+  if (newLogged.length === loggedGames.length) {
+    alert("No such game found in logged games.");
+    return;
+  }
+
+  loggedGames = newLogged;
+  saveLoggedGames();
+  renderGames(searchInput.value);
 }
 
 searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const filtered = defaultGames
-    .concat(tempGames)
-    .filter((game) => game.title.toLowerCase().includes(query));
-  renderGames(filtered);
+  renderGames(searchInput.value);
 });
 
 logButton.addEventListener("click", handleLogGame);
+unlogButton.addEventListener("click", handleUnlogGame);
 
+// Initial render
 renderGames();
