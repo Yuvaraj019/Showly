@@ -2,22 +2,27 @@ const gameContainer = document.getElementById("gameContainer");
 const searchInput = document.getElementById("searchInput");
 const logButton = document.getElementById("logGameBtn");
 
-const modal = document.getElementById("gameModal");
-const gameTitleInput = document.getElementById("gameTitle");
-const gameImageInput = document.getElementById("gameImage");
-const cancelBtn = document.getElementById("cancelBtn");
-const submitBtn = document.getElementById("submitBtn");
-
 const imageBaseURL = "https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/";
 
-let games = [];
+const defaultGames = [
+  { title: "A Plague Tale: Innocence", image: imageBaseURL + "APlagueTaleInnocence.jpg" },
+  { title: "A Plague Tale: Requiem", image: imageBaseURL + "APlagueTaleRequiem.jpg" },
+  { title: "Black Myth: Wukong", image: imageBaseURL + "BlackMythWuKong.jpg" },
+  { title: "Dark Sider III", image: imageBaseURL + "DarkSidersIII.jpg" },
+  { title: "Death Stranding: Directors Cut", image: imageBaseURL + "DeathStrandingDirectorsCut.jpg" },
+  { title: "Far Cry 3", image: imageBaseURL + "Farcry3.jpg" },
+  { title: "Florence", image: imageBaseURL + "Florence.jpg" },
+  { title: "Moonlighter", image: imageBaseURL + "Moonlighter.jpg" },
+  { title: "Resident Evil VIII: Village", image: imageBaseURL + "ResidentEvilVIIIVillage.jpg" },
+  { title: "Stray", image: imageBaseURL + "Stray.jpg" },
+];
 
-// ✅ Supabase credentials
-const supabaseUrl = "https://vwipischnkmsojtzcwdf.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3aXBpc2Nobmttc29qdHpjd2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MDA5MDMsImV4cCI6MjA2OTE3NjkwM30.2kbRP6yjMR-QAYph9VzbGWZSggtKnQQAFMfKiN6DGOY";  // Replace with your real anon key
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+let games = JSON.parse(localStorage.getItem("games")) || defaultGames;
 
-// ✅ Render game cards
+function saveGamesToStorage() {
+  localStorage.setItem("games", JSON.stringify(games));
+}
+
 function createGameCard({ title, image }) {
   const gameDiv = document.createElement("div");
   gameDiv.className = "game";
@@ -46,59 +51,19 @@ function renderGames(filteredGames = games) {
   });
 }
 
-// ✅ Fetch games from Supabase
-async function fetchGames() {
-  const { data, error } = await supabase
-    .from("games")
-    .select("*")
-    .order("id", { ascending: false });
+function handleLogGame() {
+  const title = prompt("Enter game title:");
+  if (!title || !title.trim()) return alert("Title cannot be empty.");
 
-  if (error) {
-    console.error("Error fetching games:", error);
-    return;
-  }
+  const image = prompt("Enter image URL or path:");
+  if (!image || !image.trim()) return alert("Image path is required.");
 
-  games = data;
+  games.push({ title: title.trim(), image: image.trim() });
+  saveGamesToStorage();
   renderGames();
 }
 
-// ✅ Add game to Supabase
-async function addGame(title, image) {
-  const { error } = await supabase
-    .from("games")
-    .insert([{ title, image }]);
-
-  if (error) {
-    alert("Failed to log game. Try again.");
-    return;
-  }
-
-  fetchGames();
-  modal.classList.add("hidden");
-}
-
-// ✅ Modal handling
-logButton.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-  gameTitleInput.value = "";
-  gameImageInput.value = "";
-});
-
-cancelBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
-
-submitBtn.addEventListener("click", () => {
-  const title = gameTitleInput.value.trim();
-  const image = gameImageInput.value.trim();
-
-  if (!title) return alert("Title is required.");
-  if (!image) return alert("Image URL is required.");
-
-  addGame(title, image);
-});
-
-// ✅ Search filter
+// Search functionality
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase();
   const filtered = games.filter((game) =>
@@ -107,5 +72,8 @@ searchInput.addEventListener("input", () => {
   renderGames(filtered);
 });
 
-// ✅ Initial load
-fetchGames();
+logButton.addEventListener("click", handleLogGame);
+
+// Initial render
+renderGames();
+
