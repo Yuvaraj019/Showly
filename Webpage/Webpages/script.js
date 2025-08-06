@@ -82,7 +82,7 @@ const defaultGames = [
   {
     title: "Stray",
     image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/header.jpg?t=1733260906"
-  }
+  },
   {
     "title": "ELDEN RING",
     "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546"
@@ -216,3 +216,4 @@ logButton.addEventListener("click", handleLogGame);
 
 
 renderGames();
+
