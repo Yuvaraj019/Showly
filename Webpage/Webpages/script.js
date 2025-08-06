@@ -83,6 +83,46 @@ const defaultGames = [
     title: "Stray",
     image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/header.jpg?t=1733260906"
   }
+  {
+    "title": "ELDEN RING",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546"
+  },
+  {
+    "title": "God of War Ragnarök",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504"
+  },
+  {
+    "title": "Hogwarts Legacy",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1753912780"
+  },
+  {
+    "title": "God Of War",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1750949016"
+  },
+  {
+    "title": "Blasphemous",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg?t=1753974290"
+  },
+  {
+    "title": "Prince of Persia The Lost Crown",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2751000/header.jpg?t=1736259456"
+  },
+  {
+    "title": "State of Decay: YOSE",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/329430/header.jpg?t=1741378961"
+  },
+  {
+    "title": "Watch_Dogs",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057"
+  },
+  {
+    "title": "Mafia III: Definitive Edition",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/360430/header.jpg?t=1746716602"
+  },
+  {
+    "title": "Assassin's Creed III Remastered",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/911400/header.jpg?t=1692034844"
+  }
 ];
 
 let loggedGames = JSON.parse(localStorage.getItem("loggedGames")) || [];
@@ -173,5 +213,6 @@ searchInput.addEventListener("input", () => {
 });
 
 logButton.addEventListener("click", handleLogGame);
+
 
 renderGames();
