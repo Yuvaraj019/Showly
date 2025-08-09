@@ -45,7 +45,7 @@ const defaultGames = [
   },
   {
     title: "Hi-Fi RUSH",
-    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1817230/header.jpg?t=1750779437"
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817230/header.jpg?t=1750779437"
   },
   {
     title: "Horizon Zero Dawn™ Remastered",
@@ -64,8 +64,16 @@ const defaultGames = [
     image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg?t=1750954033"
   },
   {
+    title: "Marvel’s Spider-Man Remastered",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg?t=1750955096"
+  },
+  {
     title: "Middle-earth™: Shadow of War™",
     image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/356190/header.jpg?t=1747346596"
+  },
+  {
+    title: "Middle-earth: Shadow of Mordor",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/241930/header.jpg?t=1745613450"
   },
   {
     title: "Moonlighter",
@@ -84,80 +92,68 @@ const defaultGames = [
     image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/header.jpg?t=1733260906"
   },
   {
-    "title": "ELDEN RING",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546"
+    title: "ELDEN RING",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546"
   },
   {
-    "title": "God of War Ragnarök",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504"
+    title: "God of War Ragnarök",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504"
   },
   {
-    "title": "Hogwarts Legacy",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1753912780"
+    title: "Hogwarts Legacy",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1753912780"
   },
   {
-    "title": "God Of War",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1750949016"
+    title: "God Of War",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1750949016"
   },
   {
-    "title": "Blasphemous",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg?t=1753974290"
+    title: "Blasphemous",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg?t=1753974290"
   },
   {
-    "title": "Prince of Persia The Lost Crown",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2751000/header.jpg?t=1736259456"
+    title: "Prince of Persia The Lost Crown",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2751000/header.jpg?t=1736259456"
   },
   {
-    "title": "State of Decay: YOSE",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/329430/header.jpg?t=1741378961"
+    title: "State of Decay: YOSE",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/329430/header.jpg?t=1741378961"
   },
   {
-    "title": "Watch_Dogs",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057"
+    title: "Watch_Dogs",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057"
   },
   {
-    "title": "Mafia III: Definitive Edition",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/360430/header.jpg?t=1746716602"
+    title: "Mafia III: Definitive Edition",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/360430/header.jpg?t=1746716602"
   },
   {
-    "title": "Assassin's Creed III Remastered",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/911400/header.jpg?t=1692034844"
+    title: "Assassin's Creed III Remastered",
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/911400/header.jpg?t=1692034844"
   },
   {
-  title: "Yooka-Laylee and the Impossible Lair",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/846870/header.jpg?t=1729002447"
+    title: "Yooka-Laylee and the Impossible Lair",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/846870/header.jpg?t=1729002447"
   },
   {
-  title: "Marvel’s Spider-Man Remastered",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg?t=1750955096"
+    title: "Shadow Warrior",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206"
   },
   {
-  title: "Shadow Warrior",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206"
+    title: "Assassin's Creed 2",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/33230/header.jpg?t=1682004272"
   },
   {
-  title: "Hi-Fi RUSH",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817230/header.jpg?t=1750779437"
+    title: "Assassin’s Creed Brotherhood",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086"
   },
   {
-  title: "Assassin's Creed 2",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/33230/header.jpg?t=1682004272"
+    title: "Rise of the Tomb Raider",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg?t=1729011444"
   },
   {
-  title: "Assassin’s Creed Brotherhood",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086"
-  },
-  {
-  title: "Middle-earth: Shadow of Mordor",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/241930/header.jpg?t=1745613450"
-  },
-  {
-  title: "Rise of the Tomb Raider",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg?t=1729011444"
-  },
-  {
-  title: "Sleeping Dogs: Definitive Edition",
-  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1602800785"
+    title: "Sleeping Dogs: Definitive Edition",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1602800785"
   }
 ];
 
@@ -250,7 +246,4 @@ searchInput.addEventListener("input", () => {
 
 logButton.addEventListener("click", handleLogGame);
 
-
 renderGames();
-
-
