@@ -122,6 +122,42 @@ const defaultGames = [
   {
     "title": "Assassin's Creed III Remastered",
     "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/911400/header.jpg?t=1692034844"
+  },
+  {
+  title: "Yooka-Laylee and the Impossible Lair",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/846870/header.jpg?t=1729002447"
+  },
+  {
+  title: "Marvel’s Spider-Man Remastered",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817070/header.jpg?t=1750955096"
+  },
+  {
+  title: "Shadow Warrior",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206"
+  },
+  {
+  title: "Hi-Fi RUSH",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817230/header.jpg?t=1750779437"
+  },
+  {
+  title: "Assassin's Creed 2",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/33230/header.jpg?t=1682004272"
+  },
+  {
+  title: "Assassin’s Creed Brotherhood",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086"
+  },
+  {
+  title: "Middle-earth: Shadow of Mordor",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/241930/header.jpg?t=1745613450"
+  },
+  {
+  title: "Rise of the Tomb Raider",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg?t=1729011444"
+  },
+  {
+  title: "Sleeping Dogs: Definitive Edition",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1602800785"
   }
 ];
 
@@ -216,4 +252,5 @@ logButton.addEventListener("click", handleLogGame);
 
 
 renderGames();
+
 
