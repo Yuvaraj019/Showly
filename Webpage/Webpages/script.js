@@ -154,7 +154,39 @@ const defaultGames = [
   {
     title: "Sleeping Dogs: Definitive Edition",
     image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1602800785"
-  }
+  },
+  {
+  title: "Assassin's Creed® Revelations",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/201870/header.jpg?t=1739176298"
+},
+{
+  title: "Marvel's Guardians of the Galaxy",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1088850/header.jpg?t=1751567846"
+},
+{
+  title: "Assassin's Creed",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/15100/header.jpg?t=1602600542"
+},
+{
+  title: "The Last of Us™ Part I",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031"
+},
+{
+  title: "Watch_Dogs® 2",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/447040/header.jpg?t=1751986887"
+},
+{
+  title: "Resident Evil 2",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg?t=1728438541"
+},
+{
+  title: "Sunset Overdrive",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/847370/header.jpg?t=1667851405"
+},
+{
+  title: "The Council",
+  image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287630/header.jpg?t=1728650217"
+}
 ];
 
 let loggedGames = JSON.parse(localStorage.getItem("loggedGames")) || [];
@@ -247,3 +279,4 @@ searchInput.addEventListener("input", () => {
 logButton.addEventListener("click", handleLogGame);
 
 renderGames();
+
