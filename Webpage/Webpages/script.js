@@ -186,6 +186,78 @@ const defaultGames = [
 {
   title: "The Council",
   image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287630/header.jpg?t=1728650217"
+},
+{
+  "title": "Call of Duty®: Modern Warfare® Remastered",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/393080/header.jpg?t=1748021557"
+},
+{
+  "title": "Ryse: Son of Rome",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/302510/header.jpg?t=1588670554"
+},
+{
+  "title": "Outlast 2",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/414700/header.jpg?t=1618944453"
+},
+{
+  "title": "嗜血印 Bloody Spell",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/992300/header.jpg?t=1755193653"
+},
+{
+  "title": "Uncharted: Drake's Fortune",
+  "image": "https://i0.wp.com/roguewatson.com/wp-content/uploads/2018/06/uncharted-drakes-fortune-logo.jpg?fit=1200%2C675&ssl=1"
+},
+{
+  "title": "Assassin’s Creed® Liberation HD",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/260210/header.jpg?t=1747655342"
+},
+{
+  "title": "Outlast",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg?t=1666817106"
+},
+{
+  "title": "Mafia II: Definitive Edition",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030830/header.jpg?t=1747682590"
+},
+{
+  "title": "Marvel’s Spider-Man: Miles Morales",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/header.jpg?t=1750955096"
+},
+{
+  "title": "Children of Morta",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/330020/header.jpg?t=1733749085"
+},
+{
+  "title": "Sifu",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138710/header.jpg?t=1754555101"
+},
+{
+  "title": "It Takes Two",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/header.jpg?t=1749142249"
+},
+{
+  "title": "New Super Lucky's Tale",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1038300/header.jpg?t=1708370921"
+},
+{
+  "title": "NARUTO: Ultimate Ninja STORM",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/495140/header.jpg?t=1701305352"
+},
+{
+  "title": "NARUTO SHIPPUDEN: Ultimate Ninja STORM 3 Full Burst HD",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/234670/header.jpg?t=1703662542"
+},
+{
+  "title": "Mafia: Definitive Edition",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030840/header.jpg?t=1750802973"
+},
+{
+  "title": "Ori and the Will of the Wisps",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1057090/header.jpg?t=1701967625"
+},
+{
+  "title": "Tomb Raider",
+  "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/203160/header.jpg?t=1729010886"
 }
 ];
 
@@ -279,4 +351,5 @@ searchInput.addEventListener("input", () => {
 logButton.addEventListener("click", handleLogGame);
 
 renderGames();
+
 
