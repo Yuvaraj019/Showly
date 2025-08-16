@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Backloggd Clone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">Backloggd</div>
+      <div class="user">
+        <span>MonkeyDLuffyx</span>
+        <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games"/>
+        <button id="logGameBtn">+ Log a Game</button>
+      </div>
+    </header>
+
+    <section class="profile">
+      <img src="https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/Monkey%20D_%20Luffy.jpeg" alt="Monkey D. Luffy Avatar" class="avatar"/>
+      <div class="username">MonkeyDLuffyx</div>
+    </section>
+
+    <nav class="tabs" role="navigation">
+      <button class="active-tab" aria-current="page">Games</button>
+    </nav>
+    
+    <main class="grid-container" id="gameContainer"></main>
+
+    <div class="pagination" id="paginationContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.user input {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.user button {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.user button:hover {
+  background-color: #d81b60;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0 10px 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+.tabs button {
+  background: none;
+  color: #aaa;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.tabs .active-tab {
+  color: white;
+  border-bottom: 2px solid #e91e63;
+  font-weight: 600;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Include only the new part below filters styles */
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.filters button {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.filters button:hover {
+  background-color: #333;
+}
+
+.game {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+
+.game img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  border-radius: 0;
+}
+
+.game:hover img {
+  filter: blur(0px);
+  transform: scale(1.03);
+}
+
+.game-title {
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  font-size: 16px;
+}
+
+.rating-badge {
+  position: absolute;
+  bottom: 32px;
+  right: 2px;
+  background-color: #33b464;
+  color: #111111;
+  font-weight: 800;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 6px #33b464;
+}
+
+.game:hover .rating-badge {
+  opacity: 1;
+}
+
+.playtime-badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  background-color: #1e1e1e;
+  color: #ccc;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.game:hover .playtime-badge {
+  opacity: 1;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 30px 0 50px;
+}
+
+.pagination button {
+  background-color: #2c2f3a;
+  border: none;
+  color: #ccc;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #3b3e4b;
+}
+
+.pagination button.active {
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .user input {
+    width: 100%;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+
+const gameContainer = document.getElementById("gameContainer");
+const searchInput = document.getElementById("searchInput");
+const logButton = document.getElementById("logGameBtn");
+
+const defaultGames = [
+  {
+    "title": "A Plague Tale: Innocence",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/752590/header.jpg?t=1727793332",
+    "rating": 9.2,
+    "playtime": "12h 54m"
+  },
+  {
+    "title": "A Plague Tale: Requiem",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1182900/header.jpg?t=1728650613",
+    "rating": 9.5,
+    "playtime": "20h 48m"
+  },
+  {
+    "title": "Assassin's Creed",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/15100/header.jpg?t=1602600542"
+  },
+  {
+    "title": "Assassin's Creed 2",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/33230/header.jpg?t=1682004272"
+  },
+  {
+    "title": "Assassin's Creed 3 Remastered",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/911400/header.jpg?t=1692034844"
+  },
+  {
+    "title": "Assassin's Creed Brotherhood",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086"
+  },
+  {
+    "title": "Assassin's Creed Liberation HD",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/260210/header.jpg?t=1747655342"
+  },
+  {
+    "title": "Assassin's Creed Revelations",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/201870/header.jpg?t=1739176298"
+  },
+  {
+    "title": "Assassin's Creed IV Black Flag",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242050/header.jpg?t=1752168657"
+  },
+  {
+    "title": "Batman: Arkham Knight",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/208650/header.jpg?t=1745534372"
+  },
+  {
+    "title": "Black Myth: Wukong",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1749182199"
+  },
+  {
+    "title": "Blasphemous",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg?t=1753974290"
+  },
+  {
+    "title": "Call of Duty: Modern Warfare Remastered",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/393080/header.jpg?t=1748021557"
+  },
+  {
+    "title": "Children of Morta",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/330020/header.jpg?t=1733749085"
+  },
+  {
+    "title": "Darksiders III",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606280/header.jpg?t=1725285714"
+  },
+  {
+    "title": "Death Stranding: Director's Cut",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1850570/header.jpg?t=1750697259"
+  },
+  {
+    "title": "ELDEN RING",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1748630546"
+  },
+  {
+    "title": "Far Cry 3",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220240/header.jpg?t=1752169206"
+  },
+  {
+    "title": "Florence",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1102130/header.jpg?t=1729099629"
+  },
+  {
+    "title": "Ghost of Tsushima Director's Cut",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg?t=1750948552"
+  },
+  {
+    "title": "Hi-Fi RUSH",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817230/header.jpg?t=1750779437"
+  },
+  {
+    "title": "God of War",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1750949016"
+  },
+  {
+    "title": "God of War Ragnarok",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/header.jpg?t=1750909504"
+  },
+  {
+    "title": "Hogwarts Legacy",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1753912780"
+  },
+  {
+    "title": "Horizon Zero Dawn Remastered",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2561580/header.jpg?t=1750952943"
+  },
+  {
+    "title": "It Takes Two",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1426210/header.jpg?t=1749142249"
+  },
+  {
+    "title": "Kena: Bridge of Spirits",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1954200/header.jpg?t=1664298117"
+  },
+  {
+    "title": "Mafia II: Definitive Edition",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030830/header.jpg?t=1747682590"
+  },
+  {
+    "title": "Mafia: Definitive Edition",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030840/header.jpg?t=1750802973"
+  },
+  {
+    "title": "Marvel's Guardians of the Galaxy",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1088850/header.jpg?t=1751567846"
+  },
+  {
+    "title": "Marvel's Spider-Man 2",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg?t=1750954033"
+  },
+  {
+    "title": "Marvel's Spider-Man: Miles Morales",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1817190/header.jpg?t=1750955096"
+  },
+  {
+    "title": "Middle-earth: Shadow of Mordor",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/241930/header.jpg?t=1745613450"
+  },
+  {
+    "title": "Middle-earth: Shadow of War",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/356190/header.jpg?t=1747346596"
+  },
+  {
+    "title": "Moonlighter",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606150/header.jpg?t=1749470807"
+  },
+  {
+    "title": "NARUTO: Ultimate Ninja STORM",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/495140/header.jpg?t=1701305352"
+  },
+  {
+    "title": "NARUTO SHIPPUDEN: Ultimate Ninja STORM 3 Full Burst HD",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/234670/header.jpg?t=1703662542"
+  },
+  {
+    "title": "New Super Lucky's Tale",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1038300/header.jpg?t=1708370921"
+  },
+  {
+    "title": "Outlast",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg?t=1666817106"
+  },
+  {
+    "title": "Outlast 2",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/414700/header.jpg?t=1618944453"
+  },
+  {
+    "title": "Prince of Persia The Lost Crown",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2751000/header.jpg?t=1736259456"
+  },
+  {
+    "title": "Red Dead Redemption",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459"
+  },
+  {
+    "title": "Resident Evil 2",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/883710/header.jpg?t=1728438541"
+  },
+  {
+    "title": "Resident Evil VIII: Village",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1196590/header.jpg?t=1741142800"
+  },
+  {
+    "title": "Rise of the Tomb Raider",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/391220/header.jpg?t=1729011444"
+  },
+  {
+    "title": "Ryse: Son of Rome",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/302510/header.jpg?t=1588670554"
+  },
+  {
+    "title": "Shadow Warrior",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/233130/header.jpg?t=1710246206"
+  },
+  {
+    "title": "Sifu",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2138710/header.jpg?t=1754555101"
+  },
+  {
+    "title": "Sleeping Dogs: Definitive Edition",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1602800785"
+  },
+  {
+    "title": "State of Decay: YOSE",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/329430/header.jpg?t=1741378961"
+  },
+  {
+    "title": "Stray",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1332010/header.jpg?t=1733260906"
+  },
+  {
+    "title": "Sunset Overdrive",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/847370/header.jpg?t=1667851405"
+  },
+  {
+    "title": "The Council",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287630/header.jpg?t=1728650217"
+  },
+  {
+    "title": "The Last of Us Part I",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031"
+  },
+  {
+    "title": "Tomb Raider",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/203160/header.jpg?t=1729010886"
+  },
+  {
+    "title": "Uncharted: Drake's Fortune",
+    "image": "https://i0.wp.com/roguewatson.com/wp-content/uploads/2018/06/uncharted-drakes-fortune-logo.jpg?fit=1200%2C675&ssl=1"
+  },
+  {
+    "title": "Watch Dogs",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057"
+  },
+  {
+    "title": "Watch Dogs 2",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/447040/header.jpg?t=1751986887"
+  },
+  {
+    "title": "Yooka-Laylee and the Impossible Lair",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/846870/header.jpg?t=1729002447"
+  },
+  {
+    "title": "嗜血印 Bloody Spell",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/992300/header.jpg?t=1755193653"
+  }
+]
+
+// Add rating 0 by default for games without rating
+defaultGames.forEach(g => {
+  if (!g.rating) g.rating = 0;
+});
+
+let loggedGames = JSON.parse(localStorage.getItem("loggedGames")) || [];
+loggedGames.forEach(g => {
+  if (!g.rating) g.rating = 0;
+});
+
+const gamesPerPage = 16;
+let currentPage = 1;
+let ratingAsc = null;
+let timeAsc = null;
+
+function saveLoggedGames() {
+  localStorage.setItem("loggedGames", JSON.stringify(loggedGames));
+}
+
+function createGameCard({ title, image, rating, playtime }) {
+  const gameDiv = document.createElement("div");
+  gameDiv.className = "game";
+
+  const img = document.createElement("img");
+  img.src = image;
+  img.alt = title;
+  img.loading = "lazy";
+  img.onerror = () => {
+    img.src = "https://via.placeholder.com/300x400?text=Image+Not+Found";
+    img.alt = "Image not found";
+  };
+
+  const caption = document.createElement("div");
+  caption.className = "game-title";
+  caption.textContent = title;
+
+  const ratingBadge = document.createElement("div");
+  ratingBadge.className = "rating-badge";
+  ratingBadge.textContent = rating > 0 ? rating.toFixed(1) : "N/A";
+
+  const playtimeBadge = document.createElement("div");
+  playtimeBadge.className = "playtime-badge";
+  playtimeBadge.textContent = playtime || "";
+
+  gameDiv.append(img, ratingBadge, playtimeBadge, caption);
+  return gameDiv;
+}
+
+function paginateGames(games, page) {
+  const start = (page - 1) * gamesPerPage;
+  return games.slice(start, start + gamesPerPage);
+}
+
+function renderPagination(filteredGames) {
+  const pagination = document.getElementById("paginationContainer");
+  pagination.innerHTML = "";
+
+  const pageCount = Math.ceil(filteredGames.length / gamesPerPage);
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    if (i === currentPage) btn.classList.add("active");
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      renderGames(searchInput.value);
+    });
+
+    pagination.appendChild(btn);
+  }
+}
+
+function renderGames(searchTerm = "") {
+  let allGames = [...loggedGames, ...defaultGames];
+  const lowerSearch = searchTerm.toLowerCase();
+
+  let filteredGames = allGames.filter(game =>
+    game.title.toLowerCase().includes(lowerSearch)
+  );
+
+  if (ratingAsc !== null) {
+    filteredGames.sort((a, b) =>
+      ratingAsc ? a.rating - b.rating : b.rating - a.rating
+    );
+  } else if (timeAsc !== null) {
+    const parseTime = time => {
+      if (!time) return 0;
+      const match = time.match(/(\d+)h\s*(\d+)?m?/);
+      const hours = match ? parseInt(match[1]) : 0;
+      const mins = match && match[2] ? parseInt(match[2]) : 0;
+      return hours * 60 + mins;
+    };
+    filteredGames.sort((a, b) =>
+      timeAsc ? parseTime(a.playtime) - parseTime(b.playtime)
+              : parseTime(b.playtime) - parseTime(a.playtime)
+    );
+  }
+
+  const gamesToShow = paginateGames(filteredGames, currentPage);
+  gameContainer.innerHTML = "";
+  gamesToShow.forEach(game => {
+    const card = createGameCard(game);
+    gameContainer.appendChild(card);
+  });
+
+  renderPagination(filteredGames);
+}
+
+// Sort buttons
+const filtersDiv = document.createElement("div");
+filtersDiv.className = "filters";
+document.querySelector("header .user")?.appendChild(filtersDiv);
+
+const sortRatingBtn = document.createElement("button");
+const sortTimeBtn = document.createElement("button");
+const resetBtn = document.createElement("button");
+
+sortRatingBtn.textContent = "Sort by Rating";
+sortTimeBtn.textContent = "Sort by Time Played";
+resetBtn.textContent = "Reset Filters";
+
+filtersDiv.append(sortRatingBtn, sortTimeBtn, resetBtn);
+
+function updateSortButtonIcons() {
+  sortRatingBtn.textContent = `Sort by Rating ${
+    ratingAsc === null ? "" : ratingAsc ? "↑" : "↓"
+  }`;
+  sortTimeBtn.textContent = `Sort by Time Played ${
+    timeAsc === null ? "" : timeAsc ? "↑" : "↓"
+  }`;
+}
+
+sortRatingBtn.addEventListener("click", () => {
+  ratingAsc = ratingAsc === null ? false : !ratingAsc;
+  timeAsc = null;
+  updateSortButtonIcons();
+  renderGames(searchInput.value);
+});
+
+sortTimeBtn.addEventListener("click", () => {
+  timeAsc = timeAsc === null ? false : !timeAsc;
+  ratingAsc = null;
+  updateSortButtonIcons();
+  renderGames(searchInput.value);
+});
+
+resetBtn.addEventListener("click", () => {
+  ratingAsc = null;
+  timeAsc = null;
+  searchInput.value = "";
+  currentPage = 1;
+  updateSortButtonIcons();
+  renderGames();
+});
+
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  renderGames(searchInput.value);
+});
+
+logButton.addEventListener("click", () => {
+  const title = prompt("Enter game title:");
+  if (!title) return alert("Title is required!");
+
+  const image = prompt("Enter image URL:");
+  if (!image) return alert("Image URL is required!");
+
+  const ratingInput = prompt("Enter rating (0 to 10, optional):");
+  let rating = parseFloat(ratingInput);
+  if (isNaN(rating) || rating < 0 || rating > 10) rating = 0;
+
+  const playtime = prompt("Enter playtime (e.g., 5h 30m, optional):") || "";
+
+  loggedGames.push({ title, image, rating, playtime });
+  saveLoggedGames();
+  renderGames(searchInput.value);
+});
+
+updateSortButtonIcons();
+renderGames();
