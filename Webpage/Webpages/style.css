@@ -81,25 +81,76 @@ header {
 
 .tabs {
   display: flex;
-  gap: 15px;
+  justify-content: space-between;
+  align-items: center;
   margin: 20px 0 10px 0;
   border-bottom: 1px solid #333;
   padding-bottom: 8px;
+  gap: 15px;
 }
 
-.tabs button {
+.tab-buttons button {
   background: none;
   color: #aaa;
   border: none;
   font-size: 15px;
   cursor: pointer;
-  padding: 8px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.tabs .active-tab {
+.tab-buttons button:hover {
+  color: white;
+  background-color: #1e1e1e;
+}
+
+.tab-buttons .active-tab {
   color: white;
   border-bottom: 2px solid #e91e63;
+  font-weight: 700;
+  background-color: #1e1e1e;
+  cursor: default;
+  pointer-events: none;
+}
+
+.tabs button.active-tab {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
   font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.tabs button.active-tab:hover {
+  background-color: #333;
+  color: white;
+}
+
+
+.sort-filters {
+  display: flex;
+  gap: 10px;
+}
+
+/* Use your existing .filters button styles on the buttons inside .sort-filters */
+.sort-filters button {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.sort-filters button:hover {
+  background-color: #333;
 }
 
 .grid-container {
@@ -109,23 +160,45 @@ header {
   margin-top: 20px;
 }
 
-.game {
+/* Include only the new part below filters styles */
+
+.filters {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.filters button {
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.filters button:hover {
+  background-color: #333;
+}
+
+.game {
   position: relative;
+  width: 100%;
+  cursor: pointer;
 }
 
 .game img {
   width: 100%;
   height: auto;
-  border-radius: 0;
   display: block;
-  transition: transform 0.2s ease-in-out;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  border-radius: 0;
 }
 
-.game img:hover {
+.game:hover img {
+  filter: blur(0px);
   transform: scale(1.03);
 }
 
@@ -136,6 +209,49 @@ header {
   color: white;
   font-size: 16px;
 }
+
+.rating-badge {
+  position: absolute;
+  bottom: 32px;
+  right: 2px;
+  background-color: #33b464;
+  color: #111111;
+  font-weight: 800;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 6px #33b464;
+}
+
+.game:hover .rating-badge {
+  opacity: 1;
+}
+
+.playtime-badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  background-color: #1e1e1e;
+  color: #ccc;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.game:hover .playtime-badge {
+  opacity: 1;
+}
+
 
 .pagination {
   display: flex;
