@@ -12,28 +12,36 @@
     <header>
       <div class="logo">Backloggd</div>
       <div class="user">
-        <span>MonkeyDLuffyx</span>
+        <span>Quixote Games</span>
         <input type="text" id="searchInput" placeholder="Search games..." aria-label="Search games"/>
-        <button id="logGameBtn">+ Log a Game</button>
+        <!-- Removed the log game button here -->
       </div>
     </header>
 
-    <section class="profile">
-      <img src="https://raw.githubusercontent.com/Yuvaraj019/Showly/main/Webpage/Game/Assets/Monkey%20D_%20Luffy.jpeg" alt="Monkey D. Luffy Avatar" class="avatar"/>
-      <div class="username">MonkeyDLuffyx</div>
-    </section>
+<section class="profile">
+  <img
+    src="https://raw.githubusercontent.com/Yuvaraj019/Showly/b06cb8ec71237fbfed35b5eaf2e7cc0564815094/Webpage/Webpages/Profile.jpeg"
+    alt="Monkey D. Luffy Avatar"
+    class="avatar"
+  />
+  <div class="username">G H O S T</div>
+</section>
 
-    <nav class="tabs" role="navigation">
-      <button class="active-tab" aria-current="page">Games</button>
-    </nav>
+<nav class="tabs" role="navigation">
+  <div class="tab-buttons">
+    <button class="active-tab" aria-current="page" id="gamesTabBtn">Games</button>
+    <button id="showAllBtn">Show All Games</button>
+  </div>
+  <div class="sort-filters">
+    <!-- Sort buttons will be injected here by JS -->
+  </div>
+</nav>
 
-    <main class="grid-container" id="gameContainer">
-      <!-- Game cards will be dynamically added -->
-    </main>
 
-    <div class="pagination" id="paginationContainer">
-      <!-- Pagination buttons will be added here -->
-    </div>
+    
+    <main class="grid-container" id="gameContainer"></main>
+
+    <div class="pagination" id="paginationContainer"></div>
   </div>
 
   <script src="script.js"></script>
