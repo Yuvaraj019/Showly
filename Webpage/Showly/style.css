@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    background-color: #131313;
+}
+
+#top-left-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px; /* adjust this size if you want */
+    height: auto;
+    z-index: 1000;
+}
