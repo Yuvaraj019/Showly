@@ -343,6 +343,10 @@ const defaultGames = [
     "title": "Shadow Burglar",
     "image": "https://cdn.cloudflare.steamstatic.com/steam/apps/1881340/header.jpg"
   }
+  {
+    "title": "Tales of Kenzera: ZAU",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2316580/header.jpg?t=1749036631"
+  }
 ]
 
 // Add rating 0 by default for games without rating
@@ -545,3 +549,4 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
