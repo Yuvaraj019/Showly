@@ -140,6 +140,8 @@ const defaultGames = [
   {
     "title": "Mafia II: Definitive Edition",
     "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1030830/header.jpg?t=1747682590"
+    "rating": 9.0,
+    "playtime": "29h 32m"
   },
   {
     "title": "Mafia: Definitive Edition",
@@ -549,5 +551,6 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
