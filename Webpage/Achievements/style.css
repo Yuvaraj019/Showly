@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1b2838;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 936px;
+  height: 140px;
+  background-color: #16202d;
+  position: relative; /* needed for absolute positioning inside */
+}
+
+/* Image positioned exactly */
+.game-image {
+  position: absolute;
+  top: 9px;         /* (140 - 122) / 2 = 9px to center vertically */
+  left: 15px;
+  width: 261px;
+  height: 122px;
+  object-fit: cover;
+}
+
+/* Jersey 25 font */
+.jersey-25-regular {
+  font-family: "Jersey 25", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Jockey One font */
+.jockey-one-regular {
+  font-family: "Jockey One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Jost font - regular */
+.jost-regular {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Title positioned 10px right of image and 28px from top */
+.game-title {
+  position: absolute;
+  top: 28px;
+  left: calc(15px + 260px + 10px); /* = 286px */
+  color: #FFFFFF; /* Text color */
+  font-size: 22px;
+}
+
+/* TOTAL PLAYED positioned 10px right of image and 28px below title */
+.total-played {
+  position: absolute;
+  top: calc(28px + 22px + 28px); /* = 78px */
+  left: calc(15px + 260px + 10px);
+  color: #A9ADB0; /* Text color */
+  font-size: 18px;
+}
+
+.hours-played {
+  position: absolute;
+  top: 104px; /* calculated exact position */
+  left: calc(15px + 260px + 10px);
+  color: #A9ADB0;
+  font-size: 15px;
+}
+
+.last-played {
+  position: absolute;
+  top: calc(28px + 22px + 28px); 
+  left: calc(15px + 380px + 10px);
+  color: #A9ADB0; 
+  font-size: 18px;
+}
+
+.date-played {
+  position: absolute;
+  top: 104px; /* calculated exact position */
+  left: calc(15px + 380px + 10px);
+  color: #A9ADB0;
+  font-size: 15px;
+}
+
+.achieve {
+  position: absolute;
+  top: calc(28px + 22px + 28px); 
+  left: calc(15px + 500px + 10px);
+  color: #A9ADB0; 
+  font-size: 18px;
+}
+
+.total-achieve {
+  position: absolute;
+  top: calc(28px + 22px + 28px); 
+  left: calc(15px + 660px + 10px);
+  color: #A9ADB0; 
+  font-size: 18px;
+}
+
+.bar {
+  width: 196px;
+  height: 6px;
+  position: absolute;
+  top: calc(28px + 52px + 28px); 
+  left: calc(15px + 500px + 10px);
+  background-color: #1A9FFF;
+}
+
+.image-row {
+  position: absolute;
+  top: 104px;
+  left: calc(15px + 720px + 10px);
+  display: flex;
+  gap: 5px; /* 5 pixels gap between images */
+}
+
+.image-row img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain; /* keep aspect ratio if images have different proportions */
+}
