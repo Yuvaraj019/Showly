@@ -73,6 +73,12 @@ const defaultGames = [
     "title": "Children of Morta",
     "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/330020/header.jpg?t=1733749085"
   },
+   {
+    "title": "Control Ultimate Edition",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/870780/header.jpg?t=1755611834",
+    "rating": 8.8,
+    "playtime": "38h 42m"
+  },
   {
     "title": "Darksiders III",
     "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/606280/header.jpg?t=1725285714"
@@ -551,6 +557,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
