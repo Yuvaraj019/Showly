@@ -136,6 +136,12 @@ const defaultGames = [
     "playtime": "92h 25m"
   },
   {
+    "title": "Hollow Knight",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg?t=1695270428",
+    "rating": 9.2,
+    "playtime": "42h 32m"
+  },
+  {
     "title": "Hogwarts Legacy",
     "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/990080/a3cdc6f40d97df8ac993679c2dd1edeb5222421e/header.jpg?t=1753912780",
     "rating": 9.8,
@@ -569,6 +575,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
