@@ -66,6 +66,12 @@ const defaultGames = [
     "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/774361/header.jpg?t=1753974290"
   },
   {
+    "title": "Call of Duty: Modern Warfare",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2000950/header.jpg?t=1678294805"
+    "rating": 9.5,
+    "playtime": "10h 15m"
+  },
+  {
     "title": "Call of Duty: Modern Warfare Remastered",
     "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/393080/header.jpg?t=1748021557"
   },
@@ -557,6 +563,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
