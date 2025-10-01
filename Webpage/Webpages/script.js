@@ -121,7 +121,7 @@ const defaultGames = [
   },
   {
     "title": "Ghost of Tsushima Director's Cut",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2215430/header.jpg?t=1750948552",
+    "image": "https://cdn2.steamgriddb.com/grid/302a84d1a6158101e1dbabe4e967be35.png",
     "rating": 9.8,
     "playtime": "78h 42m"
   },
@@ -131,7 +131,7 @@ const defaultGames = [
   },
   {
     "title": "God of War",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1593500/header.jpg?t=1750949016",
+    "image": "https://cdn2.steamgriddb.com/grid/cde4aa653625df4d52543ade65c5c615.png",
     "rating": 9.8,
     "playtime": "72h 28m"
   },
@@ -183,7 +183,7 @@ const defaultGames = [
   },
   {
     "title": "Marvel's Spider-Man 2",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2651280/header.jpg?t=1750954033"
+    "image": "https://cdn2.steamgriddb.com/grid/bf4937559217ab5f1f8912bf1eabc5f7.png"
   },
   {
     "title": "Marvel's Spider-Man: Miles Morales",
@@ -229,7 +229,7 @@ const defaultGames = [
   },
   {
     "title": "Red Dead Redemption",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459"
+    "image": "https://cdn2.steamgriddb.com/grid/3c153f4f81e6d94b307e7bd4fb4925a5.jpg"
   },
   {
     "title": "Resident Evil 2",
@@ -273,7 +273,7 @@ const defaultGames = [
   },
   {
     "title": "The Council",
-    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287630/header.jpg?t=1728650217"
+    "image": "https://cdn2.steamgriddb.com/grid/32d52d13a119a8223b3e37b4c4837a61.jpg"
   },
   {
     "title": "The Last of Us Part I",
@@ -285,7 +285,7 @@ const defaultGames = [
   },
   {
     "title": "Uncharted: Drake's Fortune",
-    "image": "https://i0.wp.com/roguewatson.com/wp-content/uploads/2018/06/uncharted-drakes-fortune-logo.jpg?fit=1200%2C675&ssl=1"
+    "image": "https://cdn2.steamgriddb.com/grid/aac79a23aefdab909e904c8c4e1f7902.png"
   },
   {
     "title": "Watch Dogs",
@@ -581,6 +581,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
