@@ -195,7 +195,7 @@ const defaultGames = [
   },
   {
     "title": "Middle-earth: Shadow of War",
-    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/356190/header.jpg?t=1747346596",
+    "image": "https://cdn2.steamgriddb.com/grid/b48d25fbc239d88d093a13c7701e65d6.png",
     "rating": 9.2,
     "playtime": "44h 00m"
   },
@@ -581,6 +581,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
