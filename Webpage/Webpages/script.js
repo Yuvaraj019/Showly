@@ -78,6 +78,12 @@ const defaultGames = [
     "playtime": "10h 35m"
   },
   {
+    "title": "Call of Duty: Modern Warfare III",
+    "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3595270/7d0f21912a075c33bbb5ea558100e187ceb234ac/header.jpg?t=1758060267",
+    "rating": 9.6,
+    "playtime": "10h 25m"
+  },
+  {
     "title": "Call of Duty: Modern Warfare Remastered",
     "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/393080/header.jpg?t=1748021557"
   },
@@ -575,6 +581,7 @@ gamesTabBtn.addEventListener("click", () => {
 updateSortButtonIcons();
 renderGames();
 gamesTabBtn.classList.add("active-tab");
+
 
 
 
