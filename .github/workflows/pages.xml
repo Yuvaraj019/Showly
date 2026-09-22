@@ -1,10 +1,10 @@
-
 name: Deploy Track Verse
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,29 +13,29 @@ permissions:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Prepare Track Verse
+      - name: Copy Track Verse
         run: |
           mkdir public
           cp -r "Track Verse"/. public/
 
-      - name: Upload artifact
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: public
 
-      - name: Deploy
+      - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
