@@ -1,92 +1,62 @@
 /* =====================================================
    TRACKVERSE GAME DATA
-=====================================================
-
-   IMPORTANT:
-
-   Change the poster paths to match your GitHub
-   repository.
-
 ===================================================== */
-
 
 let games = [
 
-{
-    id: 5,
-    title: "Hellblade: Senua's Sacrifice",
-    poster: "Assets/Games/hellblade-senuas-sacrifice.jpg",
-    rating: 4.5,
-    hours: 8,
-    minutes: 30,
-    completion: 100,
-    platform: "PC",
-    status: "completed",
-    genre: "Action Adventure",
-    notes: ""
-},
+    {
+        id: 5,
+        title: "Hellblade: Senua's Sacrifice",
+        poster: "Assets/Games/hellblade-senuas-sacrifice.jpg",
+        rating: 4.5,
+        hours: 8,
+        minutes: 30,
+        completion: 100,
+        platform: "PC",
+        status: "completed",
+        genre: "Action Adventure",
+        notes: ""
+    },
 
-{
-    id: 6,
-    title: "Senua's Saga: Hellblade II",
-    poster: "Assets/Games/senuas-saga-hellblade-2.jpg",
-    rating: 4.5,
-    hours: 7,
-    minutes: 45,
-    completion: 100,
-    platform: "PC",
-    status: "completed",
-    genre: "Action Adventure",
-    notes: ""
-},
-
+    {
+        id: 6,
+        title: "Senua's Saga: Hellblade II",
+        poster: "Assets/Games/senuas-saga-hellblade-2.jpg",
+        rating: 4.5,
+        hours: 7,
+        minutes: 45,
+        completion: 100,
+        platform: "PC",
+        status: "completed",
+        genre: "Action Adventure",
+        notes: ""
+    },
 
     {
         id: 3,
-
         title: "God of War Ragnarok",
-
         poster: "Assets/Games/god-of-war-ragnarok.jpg",
-
         rating: 4.9,
-
         hours: 92,
-
         minutes: 25,
-
         completion: 100,
-
         platform: "PS5",
-
         status: "completed",
-
         genre: "Action Adventure",
-
         notes: "Fantastic continuation of Kratos' story."
     },
 
-
     {
         id: 4,
-
         title: "Black Myth: Wukong",
-
         poster: "Assets/Games/black-myth-wukong.jpg",
-
         rating: 4.6,
-
         hours: 65,
-
         minutes: 10,
-
         completion: 85,
-
         platform: "PS5",
-
         status: "playing",
-
         genre: "Action RPG",
-
         notes: "Still playing."
     }
 
@@ -97,38 +67,20 @@ let games = [
    ELEMENTS
 ===================================================== */
 
-const gameGrid =
-    document.getElementById("gameGrid");
+const gameGrid = document.getElementById("gameGrid");
+const emptyState = document.getElementById("emptyState");
 
-const emptyState =
-    document.getElementById("emptyState");
+const searchButton = document.getElementById("searchButton");
+const searchArea = document.getElementById("searchArea");
+const searchInput = document.getElementById("searchInput");
 
-const searchButton =
-    document.getElementById("searchButton");
+const addGameButton = document.getElementById("addGameButton");
+const addModal = document.getElementById("addModal");
+const closeAdd = document.getElementById("closeAdd");
+const gameForm = document.getElementById("gameForm");
 
-const searchArea =
-    document.getElementById("searchArea");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const addGameButton =
-    document.getElementById("addGameButton");
-
-const addModal =
-    document.getElementById("addModal");
-
-const closeAdd =
-    document.getElementById("closeAdd");
-
-const gameForm =
-    document.getElementById("gameForm");
-
-const detailsModal =
-    document.getElementById("detailsModal");
-
-const closeDetails =
-    document.getElementById("closeDetails");
+const detailsModal = document.getElementById("detailsModal");
+const closeDetails = document.getElementById("closeDetails");
 
 
 /* =====================================================
@@ -139,7 +91,7 @@ let currentFilter = "all";
 
 
 /* =====================================================
-   LOAD GAMES
+   RENDER GAMES
 ===================================================== */
 
 function renderGames() {
@@ -149,22 +101,18 @@ function renderGames() {
     const searchText =
         searchInput.value.toLowerCase().trim();
 
-
     const filteredGames = games.filter(game => {
 
         const matchesFilter =
             currentFilter === "all" ||
             game.status === currentFilter;
 
-
         const matchesSearch =
             game.title
                 .toLowerCase()
                 .includes(searchText);
 
-
         return matchesFilter && matchesSearch;
-
     });
 
 
@@ -173,7 +121,6 @@ function renderGames() {
         emptyState.classList.add("show");
 
         return;
-
     }
 
 
@@ -182,10 +129,9 @@ function renderGames() {
 
     filteredGames.forEach(game => {
 
-        const card =
-            createGameCard(game);
-
-        gameGrid.appendChild(card);
+        gameGrid.appendChild(
+            createGameCard(game)
+        );
 
     });
 
@@ -201,18 +147,14 @@ function createGameCard(game) {
     const card =
         document.createElement("article");
 
-
     card.className = "game-card";
 
 
     card.innerHTML = `
 
         <div class="status-badge">
-
             ${game.status}
-
         </div>
-
 
         <div class="poster-container">
 
@@ -220,34 +162,25 @@ function createGameCard(game) {
                 src="${game.poster}"
                 alt="${game.title}"
                 loading="lazy"
-                onerror="this.src='https://placehold.co/600x900/111111/ffffff?text=Poster+Not+Found'"
+                class="game-poster"
             >
 
         </div>
 
-
         <div class="game-info">
 
             <div class="game-title">
-
                 ${game.title}
-
             </div>
-
 
             <div class="game-meta">
 
                 <span class="rating">
-
                     ★ ${game.rating}
-
                 </span>
 
-
                 <span class="playtime">
-
                     ⏱ ${game.hours}h ${game.minutes}m
-
                 </span>
 
             </div>
@@ -256,6 +189,31 @@ function createGameCard(game) {
 
     `;
 
+
+    /* =================================================
+       IMAGE ERROR HANDLING
+    ================================================= */
+
+    const image =
+        card.querySelector(".game-poster");
+
+
+    image.addEventListener("error", function () {
+
+        console.log(
+            "Image not found:",
+            game.poster
+        );
+
+        this.src =
+            "https://placehold.co/600x900/111111/ffffff?text=Poster+Not+Found";
+
+    });
+
+
+    /* =================================================
+       CARD CLICK
+    ================================================= */
 
     card.addEventListener("click", () => {
 
@@ -402,15 +360,6 @@ gameForm.addEventListener("submit", event => {
     games.push(newGame);
 
 
-    /*
-       Save locally in browser.
-
-       NOTE:
-       This means your new game will remain on this
-       browser, but it will NOT automatically sync
-       to another device yet.
-    */
-
     localStorage.setItem(
         "trackverse_games",
         JSON.stringify(games)
@@ -419,9 +368,7 @@ gameForm.addEventListener("submit", event => {
 
     gameForm.reset();
 
-
     addModal.classList.remove("show");
-
 
     renderGames();
 
@@ -534,7 +481,7 @@ closeDetails.addEventListener("click", () => {
 
 
 /* =====================================================
-   CLOSE MODALS BY CLICKING OUTSIDE
+   CLOSE MODALS OUTSIDE
 ===================================================== */
 
 addModal.addEventListener("click", event => {
@@ -577,7 +524,7 @@ document.addEventListener("keydown", event => {
 
 
 /* =====================================================
-   START APPLICATION
+   START
 ===================================================== */
 
 renderGames();
